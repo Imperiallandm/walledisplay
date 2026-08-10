@@ -1,8 +1,49 @@
+
+
+
 /*
- WallEDisplay v0.2 skeleton
- NOTE: Generated from design discussion.
+ WallEDisplay software v0.2 by Imperial Light and Magic
+ For use with the Wall-E light panel by Imperial Light and Magic V1 and above
 */
 
+
+//==============================================================
+// PIN ASSIGNMENTS
+//==============================================================
+//
+// D2  - WS2812B LED data output
+//
+// D3  - Restart push button (INPUT_PULLUP)
+//       Connect button between D3 and GND.
+//       Pressing the button clears the display and restarts
+//       the entire startup sequence.
+//
+// D4  - Sound/Motion Enable switch (INPUT_PULLUP)
+//       OPEN      = Motion sensor enabled
+//       TO GND    = Motion sensor disabled
+//       Intended for a jumper or slide switch.
+//
+// D5  - RCWL-0516 microwave motion sensor output
+//       Ignored during startup.
+//       Active only when D4 enables motion sensing.
+//
+// D8  - SoftwareSerial RX
+//       Optional connection to DYPlayer TX.
+//       Not currently used but reserved for future feedback.
+//
+// D9  - SoftwareSerial TX
+//       Connect to DYPlayer RX.
+//       Sends play/stop commands to the audio module.
+//
+// A0  - Floating analogue input used to seed the random number
+//       generator for selecting random motion sound tracks.
+//
+// Power
+// -----
+// 5V   - WS2812B LEDs, DYPlayer, RCWL-0516
+// GND  - Common ground for all devices
+//
+//==============================================================
 #include <FastLED.h>
 #include <SoftwareSerial.h>
 #include <DYPlayerArduino.h>
